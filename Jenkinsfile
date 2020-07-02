@@ -1,9 +1,5 @@
 pipeline {
 
-  environment {
-    registry = "https://hub.docker.com/repository/docker/jonidocker/kayak-app"
-    dockerImage = ""
-  }
 
   agent any
 
@@ -15,23 +11,6 @@ pipeline {
       }
     }
 
-    stage('Build image') {
-      steps{
-        script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
-        }
-      }
-    }
-
-    stage('Push Image') {
-      steps{
-        script {
-          docker.withRegistry( "" ) {
-            dockerImage.push()
-          }
-        }
-      }
-    }
 
     stage('Deploy App') {
       steps {
