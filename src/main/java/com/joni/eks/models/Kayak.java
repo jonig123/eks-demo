@@ -15,4 +15,5 @@ public class Kayak {
     private String owner;
     private Number value;
     private String makeModel;
+
 }
