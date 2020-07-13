@@ -12,14 +12,12 @@ pipeline {
     }
 
 
-    stage('Deploy App') {
-      steps {
-        script {
-          kubernetesDeploy(configs: "nginx-deployment.yaml", kubeconfigId: "mykubeconfig")
-        }
-      }
-    }
-
-  }
+      stage("Deploy To Kuberates Cluster"){
+       try {
+             sh 'kubectl rollout restart -f nginx-deployment.yaml'
+       } catch (e) {
+   	      sh 'kubectl apply -f nginx-deployment.yaml'
+   	}
+   }
 
 }
