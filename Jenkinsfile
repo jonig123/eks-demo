@@ -14,11 +14,8 @@ pipeline {
 
       stage("Deploy To Kuberates Cluster"){
      steps {
-      try {
-             sh 'kubectl rollout restart -f nginx-deployment.yaml'
-       } catch (e) {
    	      sh 'kubectl apply -f nginx-deployment.yaml'
-   	}
+
    }
    }
    }
